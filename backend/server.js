@@ -8,17 +8,24 @@ const { errorHandler } = require('./middleware/errorMiddleware');
 
 const app = express();
 const server = http.createServer(app);
-
+// Allowed frontend URLs
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://rescue-net.vercel.app"
+];
 // Initialize Socket.io
 const io = socketio(server, {
-  cors: { origin: "*", methods: ["GET", "POST"] }
+  cors: { origin: allowedOrigins, methods: ["GET", "POST"] }
 });
 
 // Make io accessible to our routes/controllers
 app.set('socketio', io);
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
 app.use(express.json());
 
 // Database Connection
