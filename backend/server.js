@@ -11,7 +11,7 @@ const server = http.createServer(app);
 // Allowed frontend URLs
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://rescue-net.vercel.app"
+  "https://rescue-net-am.vercel.app"
 ];
 // Initialize Socket.io
 const io = socketio(server, {
