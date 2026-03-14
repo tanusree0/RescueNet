@@ -1,76 +1,251 @@
-# 🐾 RescueNet: Real-Time Emergency Response System
+# 🐾 RescueNet – Real-Time Emergency Response System
 
-**RescueNet** is a decentralized reporting platform designed to eliminate the delay between animal accidents and medical assistance. By leveraging real-time geolocation and WebSockets, the system ensures help arrives as fast as possible.
+**RescueNet** is a real-time decentralized emergency reporting platform designed to reduce the delay between an animal accident and medical assistance.
 
-🚀 **[Live Demo](https://rescue-net-am.vercel.app/)** | 🛠️ **[Backend API](https://rescuenet-k0jc.onrender.com/)**
+By leveraging **GPS geolocation, WebSockets, and live tracking**, the system instantly connects reporters with nearby NGOs, volunteers, and rescue teams to ensure faster response.
 
----
-
-## 📌 The Problem
-The biggest issue in animal welfare is the critical time gap between an accident and professional medical help. Traditional reporting methods are slow, non-visual, and often fail to provide precise location data, leading to tragic delays.
-
-## ✨ Key Features
-
-* **📍 Geotagged Reporting**: Witnesses can report an injured animal with a single click. The web app automatically captures GPS coordinates via the Geolocation API for 100% accuracy.
-* **⚡ Automated Alerts**: Powered by **WebSockets (Socket.io)**, the system immediately notifies the nearest registered NGOs, ambulances, or volunteers based on the incident's radius.
-* **📡 Live Tracking**: Inspired by modern delivery apps, reporters can see the real-time status of the rescue, reducing the chances of the animal being left behind.
-* **🛡️ Secure Authentication**: Implemented JWT-based authentication to manage roles for volunteers, admins, and reporters.
-
-## 🛠️ Tech Stack
-
-- **Frontend**: React.js, Tailwind CSS, Axios, Socket.io-client
-- **Backend**: Node.js, Express.js, Socket.io
-- **Database**: MongoDB Atlas (Mongoose ODM)
-- **Deployment**: Vercel (Frontend), Render (Backend)
+🚀 **Live Demo:** https://rescue-net-am.vercel.app/
+🛠 **Backend API:** https://rescuenet-k0jc.onrender.com/
 
 ---
 
-## 🏗️ System Architecture
+# 📌 Problem Statement
 
+One of the biggest challenges in **animal welfare and rescue operations** is the **critical time gap between an accident and medical assistance**.
 
+Traditional reporting methods:
 
-1.  **Client**: React frontend captures incident data and sends it to the server.
-2.  **Server**: Node/Express backend processes the data and emits a Socket event.
-3.  **Real-time Layer**: Socket.io broadcasts the incident to all connected volunteers in the area.
-4.  **Database**: MongoDB stores historical incident data and user profiles.
+* Require phone calls or manual reporting
+* Often provide **inaccurate location information**
+* Do not support **real-time rescue coordination**
+
+These limitations frequently lead to **delayed rescue operations and preventable animal fatalities**.
+
+**RescueNet solves this problem by providing a fast, location-aware, and real-time reporting system.**
 
 ---
 
-## 🔧 Installation & Setup
+# ✨ Key Features
 
-1. **Clone the Repo**
-   ```bash
-  git clone [https://github.com/tanusree0/RescueNet.git](https://github.com/tanusree0/RescueNet.git)
-Configure Backend
+## 📍 Geotagged Emergency Reporting
 
-Navigate to /backend.
+Witnesses can report injured animals with **one click**.
 
-Create a .env file and add:
+The system automatically captures:
 
-Code snippet
+* Latitude
+* Longitude
+* User location
+
+using the **Browser Geolocation API**, ensuring accurate location data.
+
+---
+
+## ⚡ Instant Emergency Alerts
+
+The platform uses **WebSockets via Socket.io** to instantly notify nearby rescue organizations.
+
+When a report is submitted:
+
+1. The backend processes the incident
+2. A **socket event** is emitted
+3. Nearby NGOs and volunteers receive **instant alerts**
+
+---
+
+## 📡 Live Rescue Tracking
+
+Similar to modern delivery or ride-sharing applications, reporters can monitor the rescue progress in **real time**.
+
+This includes:
+
+* Rescue team acceptance
+* Arrival updates
+* Incident resolution status
+
+---
+
+## 🛡️ Secure Authentication
+
+The system implements **JWT-based authentication** for secure user access.
+
+Role-based access includes:
+
+* Reporter
+* Volunteer
+* NGO/Admin
+
+This ensures secure and structured rescue coordination.
+
+---
+
+# 🛠️ Tech Stack
+
+## Frontend
+
+* React.js
+* Tailwind CSS
+* Axios
+* Socket.io Client
+
+## Backend
+
+* Node.js
+* Express.js
+* Socket.io
+
+## Database
+
+* MongoDB Atlas
+* Mongoose ODM
+
+## Deployment
+
+* Frontend: Vercel
+* Backend: Render
+* Database: MongoDB Atlas
+
+---
+
+# 🏗️ System Architecture
+
+The system follows a **real-time event-driven architecture**.
+
+### 1. Client Layer
+
+The **React frontend** captures incident details including location, description, and images, then sends the data to the backend.
+
+### 2. Server Layer
+
+The **Node.js + Express backend**:
+
+* processes incoming reports
+* stores them in MongoDB
+* emits real-time socket events
+
+### 3. Real-Time Communication Layer
+
+Using **Socket.io**, the system broadcasts emergency alerts to all connected volunteers and NGOs within a predefined radius.
+
+### 4. Database Layer
+
+**MongoDB Atlas** stores:
+
+* incident history
+* user profiles
+* rescue status updates
+
+---
+
+# ⚙️ Installation & Setup
+
+## 1. Clone the Repository
+
+```bash
+git clone https://github.com/tanusree0/RescueNet.git
+cd RescueNet
+```
+
+---
+
+# Backend Setup
+
+Navigate to backend directory:
+
+```bash
+cd backend
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Create a `.env` file and add:
+
+```
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
-Run npm install and npm start.
+
 CLOUDINARY_NAME=your_name
 CLOUDINARY_KEY=your_key
 CLOUDINARY_SECRET=your_secret
-Configure Frontend
+```
 
-Navigate to /frontend.
+Run the backend server:
 
-Run npm install.
+```bash
+npm start
+```
 
-Start the development server with npm start.
+---
 
-🚧 Challenges Overcome
-CORS Management: Configured dynamic origin handling to allow secure communication between Vercel subdomains and Render.
+# Frontend Setup
 
-Deployment Pipeline: Optimized the build process using CI=false and npx to bypass environment-specific permission errors on Vercel.
+Navigate to frontend directory:
 
-Real-time Sync: Implemented Socket.io logic to ensure that incident alerts are pushed instantly without requiring a page refresh.
+```bash
+cd frontend
+```
 
-🤝 Contributing
-Contributions are welcome! Please feel free to submit a Pull Request.
+Install dependencies:
 
-Developed with ❤️ for Animal Welfare by Tanusree Roy
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm start
+```
+
+---
+
+# 🚧 Challenges Overcome
+
+### CORS Configuration
+
+Handled cross-origin requests between **frontend hosted on Vercel** and **backend hosted on Render** by configuring dynamic CORS policies.
+
+### Deployment Pipeline
+
+Resolved deployment issues on Vercel by optimizing the build process using:
+
+```
+CI=false
+```
+
+### Real-Time Synchronization
+
+Implemented **Socket.io event broadcasting** to ensure that emergency alerts are delivered instantly without requiring a page refresh.
+
+---
+
+# 📈 Future Improvements
+
+Possible future enhancements include:
+
+* AI-based animal injury detection using uploaded images
+* Smart volunteer radius detection
+* Mobile app integration
+* Automated ambulance dispatch system
+* Push notification system
+
+---
+
+# 🤝 Contributing
+
+Contributions are welcome!
+
+1. Fork the repository
+2. Create a feature branch
+3. Submit a Pull Request
+
+---
+
+# 👩‍💻 Author
+
+Developed with ❤️ for animal welfare by **Tanusree Roy**
