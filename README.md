@@ -1,4 +1,3 @@
-Markdown
 # 🐾 RescueNet: Real-Time Emergency Response System
 
 **RescueNet** is a decentralized reporting platform designed to eliminate the delay between animal accidents and medical assistance. By leveraging real-time geolocation and WebSockets, the system ensures help arrives as fast as possible.
