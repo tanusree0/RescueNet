@@ -13,19 +13,35 @@ const allowedOrigins = [
   "http://localhost:3000",
   "https://rescue-net-am.vercel.app"
 ];
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or curl)
+    if (!origin) return callback(null, true);
+    
+    const isAllowed = allowedOrigins.includes(origin) || 
+                     origin.endsWith(".vercel.app"); // Allows all Vercel preview branches
+
+    if (isAllowed) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+};
+
 // Initialize Socket.io
 const io = socketio(server, {
-  cors: { origin: allowedOrigins, methods: ["GET", "POST"] }
+  cors: corsOptions
 });
 
 // Make io accessible to our routes/controllers
 app.set('socketio', io);
 
 // Middleware
-app.use(cors({
-  origin: allowedOrigins,
-  credentials: true
-}));
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Database Connection
